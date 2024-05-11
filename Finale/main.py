@@ -48,6 +48,7 @@ if __name__ == "__main__":
 
 
 
-
+# python -m venv .venv
+# Cài thư viện trong requirement
 #  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .venv\Scripts\Activate
 
