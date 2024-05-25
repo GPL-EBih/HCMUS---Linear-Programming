@@ -48,7 +48,8 @@
 
 
 
-
+# python -m venv .venv
+# Cài thư viện trong requirement
 #  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .venv\Scripts\Activate
 from flask import Flask, render_template, request, jsonify
 from solver import *
