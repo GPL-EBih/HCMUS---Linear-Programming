@@ -1,0 +1,400 @@
+
+
+  
+<!DOCTYPE html>
+<html class="h-100" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,shrink-to-fit=no"
+    />
+    <meta
+      name="description"
+      content="A well made and handcrafted Bootstrap 5 template"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon-16x16.png"
+    />
+    <link rel="icon" type="image/png" sizes="96x96" href="img/favicon.png" />
+    <meta name="author" content="Holger Koenemann" />
+    <meta name="generator" content="Eleventy v2.0.1" />
+    <meta name="HandheldFriendly" content="true" />
+    <title>Caculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.min.css') }}">
+
+    <style>
+      /* Define your CSS styles here */
+      .input-group {
+        margin-bottom: 15px;
+      }
+      input[type="number"] {
+        width: 70px; /* Điều chỉnh kích thước của ô nhập số */
+      }
+    </style>
+  </head>
+
+  <body
+  
+
+    class="d-flex h-100 w-100 bg-black text-white"
+    data-bs-spy="scroll"
+    data-bs-target="#navScroll"
+  >
+
+  <nav id="navScroll" class="navbar navbar-dark bg-black fixed-top" >
+  <div class="container">
+    <a class="navbar-brand pe-md-4 fs-4 col-12 col-md-auto text-center" href="index.html">
+  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
+    <path d="m14.12 10.163 1.715.858c.22.11.22.424 0 .534L8.267 15.34a.598.598 0 0 1-.534 0L.165 11.555a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.66zM7.733.063a.598.598 0 0 1 .534 0l7.568 3.784a.3.3 0 0 1 0 .535L8.267 8.165a.598.598 0 0 1-.534 0L.165 4.382a.299.299 0 0 1 0-.535L7.733.063z"/>
+    <path d="m14.12 6.576 1.715.858c.22.11.22.424 0 .534l-7.568 3.784a.598.598 0 0 1-.534 0L.165 7.968a.299.299 0 0 1 0-.534l1.716-.858 5.317 2.659c.505.252 1.1.252 1.604 0l5.317-2.659z"/>
+  </svg>
+  <span class="ms-md-1 mt-1 fw-bolder me-md-5">HNP</span>
+</a>
+
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 list-group list-group-horizontal">
+      <li class="nav-item">
+  <a class="nav-link fs-5" href="index.html" aria-label="Homepage">
+    Trang chủ
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link fs-5" href="content.html" aria-label="A sample content page">
+    Thông tin
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link fs-5" href="system.html" aria-label="A system message page">
+    Hệ thống
+  </a>
+</li>
+
+    </ul>
+
+</div>
+</nav>
+
+
+
+    <div class="container mt-5">
+      <br> <br> <br> <br> <br>
+      <h1>Linear Optimization Input</h1>
+      <div>
+        <label for="numVariables">Số lượng biến:</label>
+        <input type="number" id="numVariables" />
+      </div>
+      <div>
+        <label for="numConstraints">Số lượng ràng buộc:</label>
+        <input type="number" id="numConstraints" />
+      </div>
+      <button onclick="generateInputFields()">Submit</button>
+
+      <div id="inputFields" style="display: none">
+
+        <h2>Hàm mục tiêu</h2>
+        <div id="targetFunctionInputs"></div>
+
+        <h2>Các ràng buộc</h2>
+        <div id="constraintInputs"></div>
+        
+        <h2>Ràng buộc biến</h2>
+        <div id="variableInputs"></div>
+        
+        <button onclick="submitForm()">Submit</button>
+
+        
+      </div>
+      <div id="result"></div>
+      
+    </div>
+    
+    
+
+    <script>
+      function generateInputFields() {
+        const numVariables = parseInt(
+          document.getElementById("numVariables").value
+        );
+        const numConstraints = parseInt(
+          document.getElementById("numConstraints").value
+        );
+
+        const variableInputs = document.getElementById("variableInputs");
+        const constraintInputs = document.getElementById("constraintInputs");
+
+        variableInputs.innerHTML = ""; // Clear previous fields
+        constraintInputs.innerHTML = ""; // Clear previous fields
+
+
+
+
+        
+
+        // Ràng buộc
+        for (let i = 1; i <= numConstraints; i++) {
+          const inputGroup = document.createElement("div");
+          inputGroup.className = "input-group";
+          inputGroup.innerHTML = `
+                <label for="constraint${i}">Ràng buộc ${i} </label>
+                ${generateConstraintInput(numVariables, i)}
+                <select id="constraintType${i}">
+                    <option value="=">=</option>
+                    <option value="≤">≤</option>
+                    <option value="≥">≥</option>
+                </select>
+                <input type="number" id="constraintResult${i}"> 
+            `;
+          constraintInputs.appendChild(inputGroup);
+        }
+                // Ràng buộc biến
+        for (let i = 1; i <= numVariables; i++) {
+          const inputGroup = document.createElement("div");
+          inputGroup.className = "input-group";
+          inputGroup.innerHTML = `
+                      <label for="variable${i}">X${i}</label>
+                      <select id="constraintTypeVariables${i}" onchange="toggleInput(${i})">
+                          <option value="free">Tự do</option>
+                          <option value="≤">≤</option>
+                          <option value="≥">≥</option>
+                      </select>
+                      
+                    <input type="number" id="variable${i}" style="display:none;" > 
+                  `;
+          variableInputs.appendChild(inputGroup);
+        }
+
+      // Hàm mục tiêu
+        const inputZ = document.createElement("div");
+          inputZ.className = "input-z";
+          inputZ.innerHTML = `
+            <label for="targetFunction">Hàm mục tiêu</label>
+            <select id="optimizationType">
+              <option value="min">Minimize</option>
+              <option value="max">Maximize</option>
+            </select>
+            ${generateTargetFunction(numVariables)}
+          `;
+      targetFunctionInputs.appendChild(inputZ);
+
+        document.getElementById("inputFields").style.display = "block"; // Show input fields
+      }
+
+      function generateConstraintInput(numVariables, index) {
+        let inputFields = "";
+        for (let i = 1; i <= numVariables; i++) {
+          if (i === numVariables) {
+            inputFields += `
+                <input type="number" id="constraint${index}_variable${i}" > X${i}  
+            `;
+          } else {
+            inputFields += `
+                <input type="number" id="constraint${index}_variable${i}" > X${i} + 
+            `;
+          }
+        }
+        
+        return inputFields;
+      }
+
+
+      
+
+
+
+
+
+      function generateTargetFunction(numVariables) {
+        let inputFields = "";
+        for (let i = 1; i <= numVariables; i++) {
+          if (i === numVariables) {
+            inputFields += `
+                <input type="number" id="targetFunction${i}" > X${i}  
+            `;
+          } else {
+            inputFields += `
+                <input type="number" id="targetFunction${i}" > X${i} + 
+            `;
+          }
+        }
+
+        return inputFields;
+      }
+
+      function toggleInput(index) {
+        const select = document.getElementById("constraintType" + index);
+        const input = document.getElementById("variable" + index);
+        if (select.value === "free") {
+          input.style.display = "none";
+        } else {
+          input.style.display = "inline";
+        }
+      }
+
+      function convertTypeValue(Type) {
+        typeValue = "";
+        if (Type === "≤") {
+          typeValue = "s";
+        } else if (Type === "≥") {
+          typeValue = "b";
+        } else {
+          typeValue = "e";
+        }
+        return typeValue;
+      }
+
+      function submitForm() {
+      // Tạo một biến lưu lại hết kết quả
+        const result = [];
+        // Lấy số lượng biến và ràng buộc
+        const numVariables = parseInt(document.getElementById("numVariables").value);
+        const numConstraints = parseInt(document.getElementById("numConstraints").value);
+
+        // Khởi tạo ma trận ràng buộc và mảng ràng buộc biến
+        const constraintMatrix = [];
+        const constraintB_Rule = [];
+        const variableConstraints = []; // Thêm ma trận lưu trữ ràng buộc biến
+
+        // Lưu giá trị từ các ô nhập liệu vào ma trận và mảng
+        let isValid = true;
+        for (let i = 1; i <= numConstraints; i++) {
+          let constraintRow = [];
+          for (let j = 1; j <= numVariables; j++) {
+            const coefficient = parseInt(document.getElementById(`constraint${i}_variable${j}`).value);
+            if (isNaN(coefficient)) {
+              isValid = false;
+              alert(`Invalid input in constraint ${i}, variable ${j}. Please enter a number.`);
+              break;
+            }
+            constraintRow.push(coefficient);
+          }
+          if (!isValid) {
+            break;
+          }
+
+          const constraintType = document.getElementById(`constraintType${i}`).value;
+          const constraintResult = parseInt(document.getElementById(`constraintResult${i}`).value);
+
+          if (isNaN(constraintResult)) {
+            isValid = false;
+            alert(`Invalid input in constraint ${i}, result. Please enter a number.`);
+            break;
+          }
+
+          // Lưu các giá trị vào mảng và ma trận
+          constraintB_Rule.push([
+            constraintResult,
+            convertTypeValue(constraintType),
+          ]);
+          constraintMatrix.push(constraintRow);
+        }
+        
+
+        // Lưu dữ liệu từ trường nhập liệu Ràng buộc biến vào ma trận
+        for (let i = 1; i <= numVariables; i++) {
+          const constraintType = document.getElementById(`constraintTypeVariables${i}`).value;
+          const constraintValue = parseInt(document.getElementById(`variable${i}`).value);
+          variableConstraints.push([convertTypeValue(constraintType), constraintValue]);
+        }
+
+
+        
+        // Lưu dữ liệu từ trường nhập liệu Hàm mục tiêu vào mảng
+        const optimizationType = document.getElementById("optimizationType").value;
+        const targetFunction = [];
+
+        for (let i = 1; i <= numVariables; i++) {
+          const coefficient = parseInt(document.getElementById(`targetFunction${i}`).value);
+          if (isNaN(coefficient)) {
+            isValid = false;
+            alert(`Invalid input in target function, variable ${i}. Please enter a number.`);
+            break;
+          }
+          targetFunction.push(coefficient);
+        }
+
+        // Hàm mục tiêu max hay min để lưu vào biến
+        const optimizationTypeValue = optimizationType === "min" ? 'False' : 'True';
+
+
+        if (isValid) {
+          // Hiển thị ma trận và mảng đã được lưu
+          console.log("Target Function:");
+          console.table(targetFunction);
+
+          console.log("Optimization Type:");
+          console.log(optimizationTypeValue);
+
+          console.log("Variable Constraints:"); 
+          console.table(variableConstraints);
+
+          console.log("Constraint Matrix:");
+          console.table(constraintMatrix);
+
+          console.log("Rule Variable Constraints:");
+          console.table(constraintB_Rule);
+          
+
+          
+          // Lưu dữ liệu vào biến result
+          result.push(targetFunction);
+          result.push(optimizationTypeValue);
+          result.push(variableConstraints);
+          result.push(constraintMatrix);
+          result.push(constraintB_Rule);
+          result.push(numVariables);
+          result.push(numConstraints);
+
+        
+        // Gửi dữ liệu tới server
+        fetch('/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        targetFunction: targetFunction,
+                        optimizationType: optimizationTypeValue,
+                        variableConstraints: variableConstraints,
+                        constraintMatrix: constraintMatrix,
+                        constraintB_Rule: constraintB_Rule
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Hiển thị kết quả trên trang web
+                    document.getElementById('result').innerHTML = "<pre>" + data.answer + "</pre>";
+
+
+                    // in giá trị result khi gắn giá trị bên trên bằng console log
+
+
+
+
+
+                })
+                .catch(error => console.error('Error:', error));
+            }
+
+
+        return result;
+      }
+
+
+    
+    </script>
+  </body>
+</html>

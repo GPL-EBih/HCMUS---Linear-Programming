@@ -237,7 +237,7 @@ class Problem:
             if xPivot == -1:
                 continue
             Table, xPivot, j = self.rotate_pivot(Table, xPivot, j)
-
+        
         Table, check = self.dantzig(Table)
         return Table, check
 
@@ -268,7 +268,7 @@ class Problem:
         print("Result: ", result)
         output = "   KẾT QUẢ BÀI TOÁN   <br>"
         if result == 1: 
-            if self.is_min == True:
+            if self.is_min == False:
                 output += "Bài toán không giới nội. Tức là Min z = -" + str(np.inf) + "<br>"
             else:
                 output += "Bài toán không giới nội. Tức là Max z = +" + str(np.inf) + "<br>"
@@ -360,9 +360,9 @@ class Problem:
                                 if -sign[i]*sign[j]*Table[pivots[i], j] == 0:
                                     continue
                                 if -sign[i]*sign[j]*Table[pivots[i], j] > 0:
-                                    root += f"+ {-sign[i]*sign[j]*Table[pivots[i], j]}{name} <br>"
+                                    root += f"+ {-sign[i]*sign[j]*Table[pivots[i], j]}{name} "
                                 else:
-                                    root += f"{-sign[i]*sign[j]*Table[pivots[i], j]}{name} <br>"
+                                    root += f"{-sign[i]*sign[j]*Table[pivots[i], j]}{name} "
                         root += " >= 0<br>"
                         output += root
                                 
@@ -387,8 +387,6 @@ class Problem:
         else:
             Table, check = self.twophase(Table)
         
-
-
         return self.output_problem(Table, check)
 
 

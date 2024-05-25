@@ -1,48 +1,48 @@
-from flask import Flask, render_template, request
-from solver import *
-from preprocessing import *
+# from flask import Flask, render_template, request
+# from solver import *
+# from preprocessing import *
 
 
 
 
-app = Flask(__name__)
+# app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        numVariables = int(request.form['numVariables'])
-        numConstraints = int(request.form['numConstraints'])
+# @app.route('/', methods=['GET', 'POST'])
+# def index():
+#     if request.method == 'POST':
+#         numVariables = int(request.form['numVariables'])
+#         numConstraints = int(request.form['numConstraints'])
 
-        isMin = request.form['isMin']
-        if isMin == 'Min':
-            isMin = True
-        else:
-            isMin = False
+#         isMin = request.form['isMin']
+#         if isMin == 'Min':
+#             isMin = True
+#         else:
+#             isMin = False
 
-        Target = request.form['Target']
-        Constraints = request.form['Constraints']
-        Variables = request.form['Variables']
+#         Target = request.form['Target']
+#         Constraints = request.form['Constraints']
+#         Variables = request.form['Variables']
 
-        # in các biến và ràng buộc của bài toán
-        print("Number of Variables:", numVariables)
-        print("Number of Constraints:", numConstraints)
-        print("Is Minimization:", isMin)
-        print("Target Function:", Target)
-        print("Constraints:", Constraints)
-        print("Variables:", Variables)
+#         # in các biến và ràng buộc của bài toán
+#         print("Number of Variables:", numVariables)
+#         print("Number of Constraints:", numConstraints)
+#         print("Is Minimization:", isMin)
+#         print("Target Function:", Target)
+#         print("Constraints:", Constraints)
+#         print("Variables:", Variables)
         
         
-        num_variables, num_constraints, is_min, target, A, b, sign_constraints, sign_variables = preprocessing_problem(numVariables, numConstraints, isMin, Target, Constraints, Variables)
-        print("b là: ", b)
-        p = Problem(num_variables, num_constraints, is_min, target, A, b, sign_constraints, sign_variables)
-        result = p.solve_problem()
+#         num_variables, num_constraints, is_min, target, A, b, sign_constraints, sign_variables = preprocessing_problem(numVariables, numConstraints, isMin, Target, Constraints, Variables)
+#         print("b là: ", b)
+#         p = Problem(num_variables, num_constraints, is_min, target, A, b, sign_constraints, sign_variables)
+#         result = p.solve_problem()
 
-        return render_template('./website/result.html', result=result)
+#         return render_template('./templates/website/', result=result)
 
-    return render_template('./website/index.html')
+#     return render_template('./templates/website/index.html')
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
 
 
 
@@ -50,4 +50,118 @@ if __name__ == "__main__":
 
 
 #  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .venv\Scripts\Activate
+from flask import Flask, render_template, request, jsonify
+from solver import *
 
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('website/system.html')
+
+@app.route('/submit', methods=['POST'])
+
+def submit():
+    data = request.json
+
+    # Nhận dữ liệu từ request
+    target_function = data['targetFunction']
+    optimization_type = data['optimizationType']
+    variable_constraints = data['variableConstraints']
+    constraint_matrix = data['constraintMatrix']
+    constraint_b_rule = data['constraintB_Rule']
+    # num_variables = data['numVariables']
+    # num_constraints = data['numConstraints']
+    
+    # print('num_variables: ', num_variables)
+    # print('num_constraints: ', num_constraints)
+    print('target_function: ', target_function)
+    print('optimization_type: ', optimization_type)
+    print('variable_constraints: ', variable_constraints)
+    print('constraint_matrix: ', constraint_matrix)
+    print('constraint_b_rule: ', constraint_b_rule)
+    print("=====================================")
+
+    print("Xu ly")
+
+    # in ra kiểu dữ liệu 
+    # print(type(num_variables))
+    # print(type(num_constraints))
+    print(type(target_function))
+    print(type(optimization_type))
+    print(type(variable_constraints))
+    print(type(constraint_matrix))
+    print(type(constraint_b_rule))
+    print("=====================================")
+    num_variables = len(variable_constraints)
+    num_constraints = len(constraint_matrix)
+    target = target_function
+    is_min = optimization_type
+    A = constraint_matrix
+    b = constraint_b_rule
+
+    def convert_sign(sign):
+        if sign == 's':
+            return -1
+        elif sign == 'e':
+            return 0
+        else:
+            return 1
+    
+    
+    def split_data(data):
+        # Khởi tạo hai danh sách rỗng
+        b = []
+        sign_constraints = []
+
+        # Lặp qua từng phần tử trong danh sách ban đầu
+        for item in data:
+            b.append(item[0])  # Thêm giá trị số vào danh sách b
+            sign_constraints.append(item[1])  # Thêm chuỗi vào danh sách sign_constraints
+
+        # Trả về kết quả dưới dạng một tuple
+        return b, sign_constraints
+
+    b, sign_constraints = split_data(b)
+
+    # sign_constraints = convert_sign(sign_constraints)
+
+    # kiểm tra sign_constraints từng phần tử rồi gắn giá trị bằng hàm convert_sign
+    for i in range(len(sign_constraints)):
+        sign_constraints[i] = convert_sign(sign_constraints[i])
+
+    P = []
+    variable_constraints, P = split_data(variable_constraints)
+    
+    for i in range(len(variable_constraints)):
+        variable_constraints[i] = convert_sign(variable_constraints[i])
+
+    print("num_variables: ", num_variables)
+    print("num_constraints: ", num_constraints)
+    print("target: ", target)
+    print("is_min: ", is_min)
+    print("A: ", A)
+    print("b: ", b)
+    print("sign_constraints: ", sign_constraints)
+    print("variable_constraints: ", variable_constraints)
+    sign_variables = variable_constraints
+
+    if is_min == 'True':
+        is_min = True
+    else:
+        is_min = False
+
+
+    
+
+
+    p = Problem(num_variables, num_constraints, is_min, target, A, b, sign_constraints, sign_variables)
+    result = p.solve_problem()
+
+    # result = "Dữ liệu đã được nhận và xử lý thành công! <br>"
+    
+    # Trả về kết quả dưới dạng JSON
+    return jsonify(answer=result)
+
+if __name__ == '__main__':
+    app.run(debug=True)
