@@ -21,7 +21,7 @@ class Problem:
     
     def printProblem(self):
         Objective = ""
-        if self.is_min:
+        if self.is_min == True:
             Objective = "Min z = "
         else: 
             Objective = "Max z = "
@@ -57,6 +57,7 @@ class Problem:
             print(Vars)
 
     def convert_into_normal_form(self):
+        print("target: ", self.target)
         # Objective Function
         if self.is_min == False:
             self.target = - self.target

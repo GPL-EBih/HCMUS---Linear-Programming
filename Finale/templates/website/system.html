@@ -90,6 +90,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
     <div class="container mt-5">
       <br> <br> <br> <br> <br>
       <h1>Linear Optimization Input</h1>
@@ -101,11 +110,11 @@
         <label for="numConstraints">Số lượng ràng buộc:</label>
         <input type="number" id="numConstraints" />
       </div>
-      <button onclick="generateInputFields()">Submit</button>
+      <button id="generateButton" onclick="generateInputFields()">Submit</button>
 
       <div id="inputFields" style="display: none">
 
-        <h2>Hàm mục tiêu</h2>
+        <h2> <br> Hàm mục tiêu</h2>
         <div id="targetFunctionInputs"></div>
 
         <h2>Các ràng buộc</h2>
@@ -118,7 +127,9 @@
 
         
       </div>
-      <div id="result"></div>
+      
+        <h2 id="result"></h2>
+      
       
     </div>
     
@@ -138,6 +149,9 @@
 
         variableInputs.innerHTML = ""; // Clear previous fields
         constraintInputs.innerHTML = ""; // Clear previous fields
+
+        // Hide the generate button after it's clicked
+        document.getElementById("generateButton").style.display = "none";
 
 
 
@@ -234,13 +248,24 @@
         return inputFields;
       }
 
+      // Bản cũ có lỗi
+      // function toggleInput(index) {
+      //   const select = document.getElementById("constraintType" + index);
+      //   const input = document.getElementById("variable" + index);
+      //   if (select.value === "free") {
+      //     input.style.display = "none";
+      //   } else {
+      //     input.style.display = "inline";
+      //   }
+      // }
+
       function toggleInput(index) {
-        const select = document.getElementById("constraintType" + index);
-        const input = document.getElementById("variable" + index);
-        if (select.value === "free") {
-          input.style.display = "none";
+        const selectElement = document.getElementById(`constraintTypeVariables${index}`);
+        const inputElement = document.getElementById(`variable${index}`);
+        if (selectElement.value === 'free') {
+          inputElement.style.display = 'none';
         } else {
-          input.style.display = "inline";
+          inputElement.style.display = 'inline-block';
         }
       }
 
@@ -327,7 +352,7 @@
         }
 
         // Hàm mục tiêu max hay min để lưu vào biến
-        const optimizationTypeValue = optimizationType === "min" ? 'False' : 'True';
+        const optimizationTypeValue = optimizationType === "min" ? 'True' : 'False';
 
 
         if (isValid) {
@@ -376,14 +401,9 @@
                 .then(response => response.json())
                 .then(data => {
                     // Hiển thị kết quả trên trang web
-                    document.getElementById('result').innerHTML = "<pre>" + data.answer + "</pre>";
-
+                    document.getElementById('result').innerHTML = "<h2>" + data.answer + "</h2>";
 
                     // in giá trị result khi gắn giá trị bên trên bằng console log
-
-
-
-
 
                 })
                 .catch(error => console.error('Error:', error));

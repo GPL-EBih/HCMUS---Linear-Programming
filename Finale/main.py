@@ -88,6 +88,7 @@ def submit():
     # in ra kiểu dữ liệu 
     # print(type(num_variables))
     # print(type(num_constraints))
+    print(type(optimization_type))
     print(type(target_function))
     print(type(optimization_type))
     print(type(variable_constraints))
@@ -137,6 +138,55 @@ def submit():
     for i in range(len(variable_constraints)):
         variable_constraints[i] = convert_sign(variable_constraints[i])
 
+
+
+    num_variables = int(num_variables)
+    num_constraints = int(num_constraints)
+
+    # def convert_list_to_int(input_list):
+    #     """
+    #     Chuyển đổi các giá trị trong danh sách lồng nhau thành số nguyên.
+        
+    #     Args:
+    #         input_list (list): Danh sách chứa các giá trị hoặc danh sách lồng nhau.
+            
+    #     Returns:
+    #         list: Danh sách mới sau khi đã chuyển đổi các giá trị thành số nguyên.
+    #     """
+    #     result = []
+        
+    #     for item in input_list:
+    #         # Nếu phần tử là một danh sách, gọi đệ quy để chuyển đổi nó thành số
+    #         if isinstance(item, list):
+    #             result.append(convert_list_to_int(item))
+    #         else:
+    #             # Nếu không phải là một danh sách, chuyển đổi giá trị thành số nguyên
+    #             try:
+    #                 int_value = int(item)
+    #                 result.append(int_value)
+    #             except ValueError:
+    #                 # Nếu không thể chuyển đổi thành số, giữ nguyên giá trị
+    #                 result.append(item)
+        
+    #     return result
+    
+    # # Chuyển đổi các giá trị trong biến trừ is_min thành số nguyên
+    # num_variables = int(num_variables)
+    # num_constraints = int(num_constraints)
+    # target = convert_list_to_int(target)
+    # A = convert_list_to_int(A)
+    # b = convert_list_to_int(b)
+    # sign_constraints = convert_list_to_int(sign_constraints)
+    # variable_constraints = convert_list_to_int(variable_constraints)
+
+
+    target = np.array(target)
+    A = np.array(A)
+    b = np.array(b)
+    sign_constraints = np.array(sign_constraints)
+    variable_constraints = np.array(variable_constraints)
+
+    
     print("num_variables: ", num_variables)
     print("num_constraints: ", num_constraints)
     print("target: ", target)
@@ -149,10 +199,11 @@ def submit():
 
     if is_min == 'True':
         is_min = True
-    else:
+    if is_min == 'False':
         is_min = False
 
-
+    # Đảm bảo các giá trị trong biến trừ is_min là kiểu float hết
+    
     
 
 
