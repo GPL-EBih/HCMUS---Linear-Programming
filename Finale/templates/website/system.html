@@ -128,7 +128,7 @@
         
       </div>
       
-        <h2 id="result"></h2>
+        <div id="result"></div>
       
       
     </div>
@@ -401,7 +401,7 @@
                 .then(response => response.json())
                 .then(data => {
                     // Hiển thị kết quả trên trang web
-                    document.getElementById('result').innerHTML = "<h2>" + data.answer + "</h2>";
+                    document.getElementById('result').innerHTML = "<div>" + data.answer + "</div>";
 
                     // in giá trị result khi gắn giá trị bên trên bằng console log
 
