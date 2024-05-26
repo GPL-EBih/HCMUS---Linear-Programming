@@ -55,6 +55,9 @@ from flask import Flask, render_template, request, jsonify
 from solver import *
 
 app = Flask(__name__)
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 4000;
 
 @app.route('/')
 def index():
