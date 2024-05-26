@@ -53,6 +53,7 @@
 #  Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass; .venv\Scripts\Activate
 from flask import Flask, render_template, request, jsonify
 from solver import *
+import os 
 
 app = Flask(__name__)
 
@@ -217,4 +218,6 @@ def submit():
     return jsonify(answer=result)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
+    
