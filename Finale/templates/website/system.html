@@ -35,7 +35,11 @@
     <meta name="generator" content="Eleventy v2.0.1" />
     <meta name="HandheldFriendly" content="true" />
     <title>Caculator</title>
+
+      
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.min.css') }}">
+    
 
     <style>
       /* Define your CSS styles here */
@@ -45,6 +49,20 @@
       input[type="number"] {
         width: 70px; /* Điều chỉnh kích thước của ô nhập số */
       }
+
+
+      table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
     </style>
   </head>
 
@@ -56,7 +74,7 @@
     data-bs-target="#navScroll"
   >
 
-  <nav id="navScroll" class="navbar navbar-dark bg-black fixed-top" >
+<nav id="navScroll" class="navbar navbar-dark bg-black fixed-top" >
   <div class="container">
     <a class="navbar-brand pe-md-4 fs-4 col-12 col-md-auto text-center" href="index.html">
   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-stack" viewBox="0 0 16 16">
@@ -66,41 +84,50 @@
   <span class="ms-md-1 mt-1 fw-bolder me-md-5">HNP</span>
 </a>
 
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0 list-group list-group-horizontal">
-      <li class="nav-item">
-  <a class="nav-link fs-5" href="index.html" aria-label="Homepage">
-    Trang chủ
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link fs-5" href="content.html" aria-label="A sample content page">
-    Thông tin
-  </a>
-</li>
-<li class="nav-item">
-  <a class="nav-link fs-5" href="system.html" aria-label="A system message page">
-    Hệ thống
-  </a>
-</li>
-
-    </ul>
-
 </div>
 </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-    <div class="container mt-5">
+<div class="container mt-5">
       <br> <br> <br> <br> <br>
+      <h2>Bảng Thông Tin Sinh Viên</h2>
+    <table>
+      
+        <tr>
+          <td>Mã Số Sinh Viên</td>
+          <td>Tên Sinh Viên</td>
+        </tr>
+      
+      <tbody>
+        <tr>
+          <td>21280016</td>
+          <td>Trần Minh Hiển</td>
+        </tr>
+        <tr>
+          <td>21280040</td>
+          <td>Trần Ngọc Khánh Như</td>
+        </tr>
+        <tr>
+          <td>21280104</td>
+          <td>Lâm Gia Phú</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br> <br> 
+      
+
+
+      
+
+
+  
+
+
+
+
+
+
+      
       <h1>Linear Optimization Input</h1>
       <div>
         <label for="numVariables">Số lượng biến:</label>
