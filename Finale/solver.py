@@ -267,12 +267,12 @@ class Problem:
     def output_problem(self, Table, result):
         print("Table: ", Table)
         print("Result: ", result)
-        output = "   KẾT QUẢ BÀI TOÁN   <br>"
+        output = "Kết quả:  <br>"
         if result == 1: 
             if self.is_min == False:
-                output += "Bài toán không giới nội. Tức là Min z = -" + str(np.inf) + "<br>"
+                output += "Bài toán không giới nội. Min z = -" + str(np.inf) + "<br>"
             else:
-                output += "Bài toán không giới nội. Tức là Max z = +" + str(np.inf) + "<br>"
+                output += "Bài toán không giới nội. Max z = +" + str(np.inf) + "<br>"
         elif result == 0:
             if self.is_min == True:
                 output += "Min z = " + str(-Table[0,-1]) + "<br>"
