@@ -110,29 +110,32 @@
       </tbody>
     </table>
 
+    <hr>
+
     <br> <br> 
 
+    <hr>
       
       <h1>Linear Programming Problem Input</h1>
       <div>
-        <label for="numVariables">Số lượng biến:</label>
+        <label for="numVariables">Number variables:</label>
         <input type="number" id="numVariables" />
       </div>
       <div>
-        <label for="numConstraints">Số lượng ràng buộc:</label>
+        <label for="numConstraints">Number constaints :</label>
         <input type="number" id="numConstraints" />
       </div>
       <button id="generateButton" onclick="generateInputFields()">Submit</button>
 
       <div id="inputFields" style="display: none">
 
-        <h2> <br> Hàm mục tiêu</h2>
+        <h2> <br> Target function</h2>
         <div id="targetFunctionInputs"></div>
 
-        <h2>Các ràng buộc</h2>
+        <h2>Constaints</h2>
         <div id="constraintInputs"></div>
         
-        <h2>Ràng buộc biến</h2>
+        <h2>Variable constaints</h2>
         <div id="variableInputs"></div>
         
         <button onclick="submitForm()">Submit</button>
@@ -194,7 +197,7 @@
           inputGroup.innerHTML = `
                       <label for="variable${i}">X${i}</label>
                       <select id="constraintTypeVariables${i}" onchange="toggleInput(${i})">
-                          <option value="free">Tự do</option>
+                          <option value="free">free</option>
                           <option value="≤">≤</option>
                           <option value="≥">≥</option>
                       </select>

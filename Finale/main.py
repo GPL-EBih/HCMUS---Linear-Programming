@@ -24,7 +24,7 @@ def submit():
     constraint_b_rule = data['constraintB_Rule']
    
 
-   
+
     num_variables = len(variable_constraints)
     num_constraints = len(constraint_matrix)
     target = target_function
@@ -95,8 +95,8 @@ def submit():
         is_min = False
     
     
-    p = Problem(num_variables, num_constraints, is_min, target, A, b, sign_constraints, sign_variables)
-    result = p.solve_problem()
+    p = LinearProgrammingProblem(num_variables, num_constraints, is_min, target, A, b, sign_constraints, sign_variables)
+    result = p.solve()
 
     return jsonify(answer=result)
 
