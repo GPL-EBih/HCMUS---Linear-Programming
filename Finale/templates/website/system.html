@@ -179,7 +179,7 @@
           const inputGroup = document.createElement("div");
           inputGroup.className = "input-group";
           inputGroup.innerHTML = `
-                <label for="constraint${i}">Constaint ${i} </label>
+                <label for="constraint${i}">Ràng buộc ${i} </label>
                 ${generateConstraintInput(numVariables, i)}
                 <select id="constraintType${i}">
                     <option value="=">=</option>
@@ -211,7 +211,7 @@
         const inputZ = document.createElement("div");
           inputZ.className = "input-z";
           inputZ.innerHTML = `
-            <label for="targetFunction">Target function</label>
+            <label for="targetFunction">Hàm mục tiêu</label>
             <select id="optimizationType">
               <option value="min">Minimize</option>
               <option value="max">Maximize</option>
