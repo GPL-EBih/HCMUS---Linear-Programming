@@ -1,3 +1,4 @@
+
 # Bài Tập Thực Hành Code Môn Quy Hoạch Tuyến Tính
 
 **Giáo viên hướng dẫn:** Nguyễn Lê Hoàng Anh
@@ -46,3 +47,8 @@ Quy Hoạch Tuyến Tính từ lâu đã trở thành bài toán hóc búa, đò
 - Nếu môi trường ảo không hoạt động, bạn có thể cài đặt trực tiếp các thư viện vào máy bằng lệnh:
   ```bash
   pip install -r requirements.txt
+  ```
+  Sau đó, chạy lại chương trình:
+  ```bash
+  python main.py
+  ```
