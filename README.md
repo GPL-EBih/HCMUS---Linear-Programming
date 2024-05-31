@@ -17,7 +17,7 @@ Quy Hoạch Tuyến Tính từ lâu đã trở thành bài toán hóc búa, đò
 
 Điểm nổi bật của website là tích hợp đầy đủ 3 thuật toán tối ưu hóa tiên tiến cho bài toán Quy Hoạch Tuyến Tính: 
 
-1. **Thuật toán Đơn hình:** Là thuật toán giải quyết QHT theo phương pháp cổ điển, được sử dụng rộng rãi bởi tính đơn giản và hiệu quả cao. Thuật toán này hoạt động bằng cách lặp đi lặp lại các bước để tìm ra điểm cực đại hoặc cực tiểu của hàm mục tiêu, tuân theo các điều kiện ràng buộc của bài toán. 
+1. **Thuật toán Đơn hình:** Là thuật toán giải quyết QHTT theo phương pháp cổ điển, được sử dụng rộng rãi bởi tính đơn giản và hiệu quả cao. Thuật toán này hoạt động bằng cách lặp đi lặp lại các bước để tìm ra điểm cực đại hoặc cực tiểu của hàm mục tiêu, tuân theo các điều kiện ràng buộc của bài toán. 
 
 2. **Thuật toán Bland:** Khắc phục nhược điểm của thuật toán Đơn hình, thuật toán Bland sử dụng quy tắc chọn biến đi ra khỏi cơ sở một cách linh hoạt, giúp giải quyết các bài toán quy hoạch tuyến tính phức tạp hơn, đặc biệt là khi có nhiều biến và ràng buộc. 
 
