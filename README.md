@@ -26,6 +26,8 @@ Quy Hoạch Tuyến Tính từ lâu đã trở thành bài toán hóc búa, đò
 ## Sử dụng trực tiếp sản phẩm qua website:
 Truy cập đường dẫn : https://hcmus-linear-programming.onrender.com/
 
+Quá trình truy cập có thể mất khoảng 5 phút cho lần truy cập đầu, nếu sau khoảng 50 phút không sử dụng trang web sẽ cần được reload lại do gói VPS còn hạn chế.
+
 ## Hướng Dẫn Sử Dụng Code:
 
 1. **Mở terminal và chỉnh đường dẫn thư mục đến file `Finale`.**
@@ -55,3 +57,5 @@ Truy cập đường dẫn : https://hcmus-linear-programming.onrender.com/
   ```bash
   python main.py
   ```
+
+
