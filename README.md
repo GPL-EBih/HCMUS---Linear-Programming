@@ -23,6 +23,9 @@ Quy Hoạch Tuyến Tính từ lâu đã trở thành bài toán hóc búa, đò
 
 3. **Thuật toán Hai pha:** Phù hợp cho các bài toán quy hoạch tuyến tính có nhiều biến và ràng buộc, thuật toán Hai pha chia bài toán thành hai giai đoạn: Giai đoạn 1 biến đổi bài toán về dạng chuẩn và Giai đoạn 2 sử dụng thuật toán Đơn hình để giải quyết. 
 
+## Sử dụng trực tiếp qua website:
+Truy cập đường dẫn : https://hcmus-linear-programming.onrender.com/
+
 ## Hướng Dẫn Sử Dụng Code:
 
 1. **Mở terminal và chỉnh đường dẫn thư mục đến file `Finale`.**
