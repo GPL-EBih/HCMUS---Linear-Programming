@@ -7,9 +7,10 @@
 
 | Họ và tên           | Mã số sinh viên |
 |---------------------|-----------------|
+| Lâm Gia Phú         | 21280104        |
 | Trần Minh Hiển      | 21280016        |
 | Trần Ngọc Khánh Như | 21280040        |
-| Lâm Gia Phú         | 21280104        |
+
 
 ## Tổng Quan:
 
